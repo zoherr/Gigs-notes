@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CardComponent from "./CardComponent";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import PostCard from "./PostCard";
@@ -13,15 +12,23 @@ function Subject() {
   const { name } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true); // Added loading state
+  const [error, setError] = useState(null); // Added error state
   const navigate = useNavigate();
 
   useEffect(() => {
-    service.getPosts([]).then((posts) => {
-      if (posts) {
-        setPosts(posts.documents);
-      }
-      setLoading(false); // Set loading to false once posts are fetched
-    });
+    service.getPosts([])
+      .then((posts) => {
+        if (posts) {
+          setPosts(posts.documents);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching posts:", err);
+        setError("There was a problem loading the posts. Please try again later.");
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false once posts are fetched
+      });
   }, []);
 
   return (
@@ -41,40 +48,36 @@ function Subject() {
       <Navbar />
       <div className="w-full sm:my-[10%] my-[40%] py-8">
         <Container>
-          {loading ? ( // Conditionally render loading message
-             <>
-             <Loading />
-             </>
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <Loading />
+            </div>
+          ) : error ? (
+            <div className="text-center text-red-500">{error}</div>
           ) : (
             <Grid container spacing={2.5}>
-              {posts.map(
-                (post, index) =>
-                  post.subject === name &&
-                  post.type === "notes" && (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                      <Stack
-                        direction="column"
-                        color="inherit"
-                        component={Card}
-                        spacing={1}
-                        useFlexGap
-                        sx={{
-                          
-                          height: "100%",
-                          //   opacity: "80%",
-                          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-
-                          //   background: 'transparent',
-                          background: "rgba(255, 255, 255, 0.2)",
-                          backdropFilter: "blur(10px)",
-                          WebkitBackdropFilter: "blur(10px)",
-                        }}
-                      >
-                        <PostCard {...post} />
-                      </Stack>
-                    </Grid>
-                  )
-              )}
+              {posts
+                .filter((post) => post.subject === name && post.type === "notes")
+                .map((post, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Stack
+                      direction="column"
+                      color="inherit"
+                      component={Card}
+                      spacing={1}
+                      useFlexGap
+                      sx={{
+                        height: "100%",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                        background: "rgba(255, 255, 255, 0.2)",
+                        backdropFilter: "blur(10px)",
+                        WebkitBackdropFilter: "blur(10px)",
+                      }}
+                    >
+                      <PostCard {...post} />
+                    </Stack>
+                  </Grid>
+                ))}
             </Grid>
           )}
         </Container>
