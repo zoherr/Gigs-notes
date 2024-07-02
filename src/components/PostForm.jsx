@@ -51,7 +51,6 @@ console.log(subjectsBySemester);
 
 
 export default function PostForm({ post }) {
-    
     const userData = useSelector((state) => state.auth.userData);
 
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
