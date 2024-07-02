@@ -7,6 +7,7 @@ import PostCard from "./PostCard";
 import service from "../api/apiConfig";
 import { Container } from "../components";
 import { Card, Grid, Stack } from "@mui/material";
+import Loading from "./Loading";
 
 function Subject() {
   const { name } = useParams();
@@ -41,7 +42,9 @@ function Subject() {
       <div className="w-full sm:my-[10%] my-[40%] py-8">
         <Container>
           {loading ? ( // Conditionally render loading message
-            <div className="w-full text-center">Loading...</div>
+             <>
+             <Loading />
+             </>
           ) : (
             <Grid container spacing={2.5}>
               {posts.map(
