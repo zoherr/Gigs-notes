@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Loading from "./Loading";
 
 const subjectsBySemester = {
   1: [
@@ -146,8 +145,7 @@ export default function PostForm({ post }) {
       <Navbar />
       {/*  */}
       {loading ? ( // Conditionally render loading message
-        <div className="w-full sm:my-[10%] my-[40%] text-center">             <Loading />
-</div>
+        <div className="w-full sm:my-[10%] my-[40%] text-center">Loading...</div>
       ) : (
         <form
           onSubmit={handleSubmit(submit)}
