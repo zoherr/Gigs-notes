@@ -16,20 +16,40 @@ function Subject() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    service.getPosts([])
-      .then((posts) => {
-        if (posts) {
-          setPosts(posts.documents);
+    const fetchPosts = async () => {
+      let allFilteredPosts = [];
+      let hasMore = true;
+      let offset = 0;
+      const limit = 24; // Assuming the service allows setting a limit per request
+  
+      while (hasMore && offset < limit) {
+        const posts = await service.getPosts({ offset, limit });
+  
+        if (posts && posts.documents) {
+          // Filter the posts based on active subject names and types
+          const filteredPosts = posts.documents.filter((post) => 
+            post.subject.name.active && post.subject.type.active
+          );
+  
+          allFilteredPosts = [...allFilteredPosts, ...filteredPosts];
+          
+          // Update the offset to fetch the next batch of posts
+          offset += limit;
+  
+          // Check if there are more posts to fetch
+          hasMore = posts.documents.length === limit;
+        } else {
+          hasMore = false;
         }
-      })
-      .catch((err) => {
-        console.error("Error fetching posts:", err);
-        setError("There was a problem loading the posts. Please try again later.");
-      })
-      .finally(() => {
-        setLoading(false); // Set loading to false once posts are fetched
-      });
+      }
+  
+      setPosts(allFilteredPosts);
+      setLoading(false); // Set loading to false once all posts are fetched and filtered
+    };
+  
+    fetchPosts();
   }, []);
+  
 
   return (
     <>
