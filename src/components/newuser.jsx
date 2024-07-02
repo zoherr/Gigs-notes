@@ -142,9 +142,9 @@ export default function NewUser() {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="/login" variant="body2">
-                                        {"Have an account? Log In"}
-                                    </Link>
+                                <div onClick={()=> navigate("/login")} className="text-sm font-thin text-sky-500" >
+                    {"Have an account? Log in"}
+                  </div>
                                 </Grid>
                             </Grid>
                             <Copyright sx={{ mt: 5 }} />

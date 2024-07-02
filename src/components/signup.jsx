@@ -140,9 +140,9 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
+                  <div onClick={()=> navigate("/signup")} className="text-sm font-thin text-sky-500" >
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </div>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
