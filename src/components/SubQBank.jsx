@@ -1,28 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import CardComponent from "./CardComponent";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { useParams } from "react-router-dom";
 import PostCard from "./PostCard";
 import service from "../api/apiConfig";
 import { Container } from "../components";
 import { Card, Grid, Stack } from "@mui/material";
 import Loading from "./Loading";
-function SubjectQBank() {
-  const [loading, setLoading] = useState(true); // Added loading state
 
+function SemesterQBank() {
   const { name } = useParams();
-  console.log(name);
   const [posts, setPosts] = useState([]);
-  useEffect(() => {}, []);
-  service.getPosts([]).then((posts) => {
-    if (posts) {
-      setPosts(posts.documents);
-    }
-    setLoading(false);
-  });
+  const [loading, setLoading] = useState(true); // Added loading state
+  const [error, setError] = useState(null); // Added error state
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoading(true);
+    service.getPosts(name, "QPaper") // Pass subject (name) and type ("notes")
+      .then((posts) => {
+        if (posts) {
+          setPosts(posts.documents);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching posts:", err);
+        setError("There was a problem loading the posts. Please try again later.");
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false once posts are fetched
+      });
+  }, [name]);
 
   return (
     <>
@@ -39,42 +47,38 @@ function SubjectQBank() {
         />
       </div>
       <Navbar />
-      <div className="w-full  sm:my-[10%] my-[40%] py-8">
+      <div className="w-full sm:my-[10%] my-[40%] py-8">
         <Container>
-        {loading ? ( // Conditionally render loading message
-            <>
-            <Loading />
-            </>
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <Loading />
+            </div>
+          ) : error ? (
+            <div className="text-center text-red-500">{error}</div>
           ) : (
             <Grid container spacing={2.5}>
-              {posts.map(
-                (post, index) =>
-                  post.subject === name &&
-                  post.type === "QPaper" && (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                      <Stack
-                        direction="column"
-                        color="inherit"
-                        component={Card}
-                        spacing={1}
-                        useFlexGap
-                        sx={{
-                          
-                          height: "100%",
-                          //   opacity: "80%",
-                          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-
-                          //   background: 'transparent',
-                          background: "rgba(255, 255, 255, 0.2)",
-                          backdropFilter: "blur(10px)",
-                          WebkitBackdropFilter: "blur(10px)",
-                        }}
-                      >
-                        <PostCard {...post} />
-                      </Stack>
-                    </Grid>
-                  )
-              )}
+              {posts
+                .filter((post) => post.subject === name && post.type === "notes")
+                .map((post, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Stack
+                      direction="column"
+                      color="inherit"
+                      component={Card}
+                      spacing={1}
+                      useFlexGap
+                      sx={{
+                        height: "100%",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                        background: "rgba(255, 255, 255, 0.2)",
+                        backdropFilter: "blur(10px)",
+                        WebkitBackdropFilter: "blur(10px)",
+                      }}
+                    >
+                      <PostCard {...post} />
+                    </Stack>
+                  </Grid>
+                ))}
             </Grid>
           )}
         </Container>
@@ -84,4 +88,4 @@ function SubjectQBank() {
   );
 }
 
-export default SubjectQBank;
+export default SemesterQBank;
