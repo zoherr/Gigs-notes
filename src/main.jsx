@@ -50,49 +50,37 @@ const router = createBrowserRouter([
           {
             path: "/semester/:batch",
             element: (
-                <AuthLayout authentication={false}>
                     <Semester  />
-               </AuthLayout>
             ),
         },
         {
             path: "/semester-qbank/:batch",
             element: (
-                <AuthLayout authentication={false}>
                     <SemesterQBank  />
-               </AuthLayout>
             ),
         },
         {
             path: "/semester-qpaper/:batch",
             element: (
-                <AuthLayout authentication={false}>
                     <SemesterQPaper  />
-               </AuthLayout>
             ),
         },
         {
             path: "/sub-notes/:name",
             element: (
-                <AuthLayout authentication={false}>
                     <Subject  />
-               </AuthLayout>
             ),
         },
         {
             path: "/sub-qpaper/:name",
             element: (
-                <AuthLayout authentication={false}>
                     <SubjectQPaper  />
-               </AuthLayout>
             ),
         },
         {
             path: "/sub-qbank/:name",
             element: (
-                <AuthLayout authentication={false}>
                     <SubjectQBank  />
-               </AuthLayout>
             ),
         },
         //   {
