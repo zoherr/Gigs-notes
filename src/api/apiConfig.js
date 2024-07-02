@@ -87,20 +87,27 @@ export class Service {
         }
     }
 
-    async getPosts(queries = [Query.equal("status", "active")]) {
+    async getPosts(subject, type, queries = [Query.equal("status", "active")]) {
         try {
+            // Add filters for subject and type
+            if (subject) {
+                queries.push(Query.equal("subject", subject));
+            }
+            if (type) {
+                queries.push(Query.equal("type", type));
+            }
+            
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
                 queries,
-
-
-            )
+            );
         } catch (error) {
-            console.log("Appwrite serive :: getPosts :: error", error);
-            return false
+            console.log("Appwrite service :: getPosts :: error", error);
+            return false;
         }
     }
+    
 
     // file upload service
 

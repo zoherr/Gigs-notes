@@ -16,7 +16,8 @@ function Subject() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    service.getPosts([])
+    setLoading(true);
+    service.getPosts(name, "notes") // Pass subject (name) and type ("notes")
       .then((posts) => {
         if (posts) {
           setPosts(posts.documents);
@@ -29,7 +30,7 @@ function Subject() {
       .finally(() => {
         setLoading(false); // Set loading to false once posts are fetched
       });
-  }, []);
+  }, [name]);
 
   return (
     <>
