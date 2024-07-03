@@ -9,6 +9,9 @@ import Footer from "./components/Footer"
 import Loading from "./components/Loading"
 
 function App() {
+  // 
+ 
+  // 
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   useEffect(() => {

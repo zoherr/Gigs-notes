@@ -5,5 +5,6 @@ const config = {
     appwriteCollectionId: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
     appwriteBucketPdfId : String(import.meta.env.VITE_APPWRITE_BUCKET_PDF_ID),
     appwriteBucketImgId: String(import.meta.env.VITE_APPWRITE_BUCKET_IMG_ID),
+    
 }
 export default config;

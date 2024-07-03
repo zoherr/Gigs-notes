@@ -1,5 +1,6 @@
 import config from "../config/config";
 import { Client, Databases, Storage, Query, ID } from "appwrite";
+import {Users} from "node-appwrite"
 export class Service {
     client = new Client();
     databases;
@@ -9,8 +10,11 @@ export class Service {
         this.client
             .setEndpoint(config.appwriteUrl)
             .setProject(config.appwriteProjectId);
+            // .setKey(config.appwriteAdminKey);
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
+        this.users = new Users(this.client);
+
     }
 
     async createPost({ title, slug, semester, status, PDF, UserId, subject ,Name,type}) {
@@ -143,6 +147,9 @@ export class Service {
             fileId
         )
     }
+
+    // Admin Features
+   
 }
 
 

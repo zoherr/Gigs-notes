@@ -20,7 +20,7 @@ export default function Hero() {
 
   const authStatus = useSelector((state) => state.auth.status);
   var userName = "";
-  
+
   if (authStatus) {
     userName = useSelector((state) => state.auth.userData.name);
   }
@@ -37,7 +37,6 @@ export default function Hero() {
               : `linear-gradient(#02294F, ${alpha("#090E10", 0.0)})`,
           backgroundSize: "100% 20%",
           backgroundRepeat: "no-repeat",
-          
         })}
       >
         <Container
@@ -49,12 +48,10 @@ export default function Hero() {
             pb: { xs: 8, sm: 12 },
           }}
         >
-
           <Stack
             spacing={2}
             useFlexGap
-            sx={{ width: { xs: "100%", sm: "70%" } , mt:8}}
-            
+            sx={{ width: { xs: "100%", sm: "70%" }, mt: 8 }}
           >
             <Typography
               variant="h1"
@@ -72,7 +69,7 @@ export default function Hero() {
                 variant="h1"
                 sx={{
                   fontSize: "clamp(3rem, 10vw, 4rem)",
-                  color: "#4A249D"
+                  color: "#4A249D",
                 }}
               >
                 {authStatus ? userName + "!" + "👋" : "Wise man! 👋"}
@@ -94,16 +91,15 @@ export default function Hero() {
               useFlexGap
               sx={{ pt: 2, width: { xs: "100%", sm: "auto" } }}
             >
-             
               {authStatus ? (
                 <>
                   <Button
                     variant="contained"
                     onClick={() => navigate("/")}
                     // color="primary"
-                    sx={{  backgroundColor: "#4A249D"}}
+                    sx={{ backgroundColor: "#4A249D" }}
                   >
-                   Enjoy
+                    Enjoy
                   </Button>
                 </>
               ) : (
@@ -111,7 +107,7 @@ export default function Hero() {
                   <Button
                     variant="contained"
                     onClick={() => navigate("./login")}
-                    sx={{  backgroundColor: "#4A249D"}}
+                    sx={{ backgroundColor: "#4A249D" }}
                     // className="text-[#4A249D]"
                   >
                     Start now
@@ -121,26 +117,25 @@ export default function Hero() {
             </Stack>
             {!authStatus && (
               <>
-            <Typography
-              variant="caption"
-              textAlign="center"
-              sx={{ opacity: 0.8 }}
-            >
-              By clicking &quot;Start now&quot; you agree to our&nbsp;
-              <Link href="#" color="#4A249D">
-                Terms & Conditions
-              </Link>
-              .
-            </Typography>
-            </>
+                <Typography
+                  variant="caption"
+                  textAlign="center"
+                  sx={{ opacity: 0.8 }}
+                >
+                  By clicking &quot;Start now&quot; you agree to our&nbsp;
+                  <Link href="#" color="#4A249D">
+                    Terms & Conditions
+                  </Link>
+                  .
+                </Typography>
+              </>
             )}
-
           </Stack>
         </Container>
       </Box>
       <CardComponent />
-      <HomeQBank/>
-      <HomeQPaper/>
+      <HomeQBank />
+      <HomeQPaper />
       <Footer />
     </>
   );
