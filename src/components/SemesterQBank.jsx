@@ -26,7 +26,7 @@ function SemesterQBank() {
       { name: "Advanced Web Designing -1", slug: "/sub-qbank/advanced-web-designing-1" },
       { name: "Data Base Management System", slug: "/sub-qbank/database-management-system" },
       { name: "Human Values and professional Ethics", slug: "/sub-qbank/human-values-and-professional-ethics" },
-      { name: "English -1", slug: "/sub-qbank/english-1" },
+      { name: "TCS", slug: "/sub-qbank/tcs" },
       { name: "Basic of finance", slug: "/sub-qbank/basic-of-finance" },
     ]  
   }

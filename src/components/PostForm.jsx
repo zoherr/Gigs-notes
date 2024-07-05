@@ -23,7 +23,7 @@ const subjectsBySemester = {
     "advanced-web-designing-1",
     "database-management-system",
     "human-values-and-professional-ethics",
-    "english-1",
+    "tcs",
     "basic-of-finance",
   ],
   3: [

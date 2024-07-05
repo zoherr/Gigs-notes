@@ -26,7 +26,7 @@ function SemesterQPaper() {
       { name: "Advanced Web Designing -1", slug: "/sub-qpaper/advanced-web-designing-1" },
       { name: "Data Base Management System", slug: "/sub-qpaper/database-management-system" },
       { name: "Human Values and professional Ethics", slug: "/sub-qpaper/human-values-and-professional-ethics" },
-      { name: "English -1", slug: "/sub-qpaper/english-1" },
+      { name: "TCS", slug: "/sub-qpaper/tcs" },
       { name: "Basic of finance", slug: "/sub-qpaper/basic-of-finance" },
     ]  
   }
