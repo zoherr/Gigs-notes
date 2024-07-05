@@ -106,7 +106,7 @@ function Navbar() {
               }}
             >
               <img
-                src={`./files/logoipsum-280.svg`}
+                src={"https://i.ibb.co/ph3JYkj/logoipsum-293-1.png"}
           
                 style={logoStyle}
                 height="5"
