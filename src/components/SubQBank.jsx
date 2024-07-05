@@ -17,7 +17,7 @@ function SemesterQBank() {
 
   useEffect(() => {
     setLoading(true);
-    service.getPosts(name, "QPaper") // Pass subject (name) and type ("notes")
+    service.getPosts(name, "QBank") // Pass subject (name) and type ("notes")
       .then((posts) => {
         if (posts) {
           setPosts(posts.documents);
@@ -58,7 +58,7 @@ function SemesterQBank() {
           ) : (
             <Grid container spacing={2.5}>
               {posts
-                .filter((post) => post.subject === name && post.type === "notes")
+                .filter((post) => post.subject === name && post.type === "QBank")
                 .map((post, index) => (
                   <Grid item xs={12} sm={6} md={4} key={index}>
                     <Stack

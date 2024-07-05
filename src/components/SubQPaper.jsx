@@ -58,7 +58,7 @@ function SubjectQPaper() {
           ) : (
             <Grid container spacing={2.5}>
               {posts
-                .filter((post) => post.subject === name && post.type === "notes")
+                .filter((post) => post.subject === name && post.type === "QPaper")
                 .map((post, index) => (
                   <Grid item xs={12} sm={6} md={4} key={index}>
                     <Stack
