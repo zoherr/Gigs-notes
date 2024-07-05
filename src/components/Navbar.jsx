@@ -106,9 +106,8 @@ function Navbar() {
               }}
             >
               <img
-                src={
-                  "../assets/logoipsum-280.svg"
-                }
+                src="../assets/logoipsum-280.svg"
+          
                 style={logoStyle}
                 height="5"
                 alt="logo of sitemark"
