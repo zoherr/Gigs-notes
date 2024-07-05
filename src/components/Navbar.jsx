@@ -28,7 +28,7 @@ const logoStyle = {
 function Navbar() {
   const notify = () => toast("Wow so easy!");
   const authStatus = useSelector((state) => state.auth.status);
-  // const userData = useSelector((state) => state.auth.userData);
+  const userData =""
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const logoutHandler = () => {
@@ -37,9 +37,10 @@ function Navbar() {
     });
   };
   const [open, setOpen] = React.useState(false);
-  let userName = ""
+  let userID = "";
   if (authStatus) {
-    userName = useSelector((state) => state.auth.userData.name);
+    userData
+    userID = useSelector((state) => state.auth.userData.$id);
   }
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -110,7 +111,7 @@ function Navbar() {
                 alt="logo of sitemark"
               />
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <MenuItem
+                <MenuItem
                   onClick={() => navigate("/")}
                   sx={{ py: "6px", px: "12px" }}
                 >
@@ -128,7 +129,7 @@ function Navbar() {
                 </MenuItem>
 
                 {/* ------------------------ */}
-                 <MenuItem
+                <MenuItem
                   onClick={() => scrollToSection("qpaper")}
                   sx={{ py: "6px", px: "12px" }}
                 >
@@ -144,7 +145,7 @@ function Navbar() {
                     Q-Bank
                   </Typography>
                 </MenuItem>
-              {/*  <MenuItem
+                {/*  <MenuItem
                   onClick={() => scrollToSection("pricing")}
                   sx={{ py: "6px", px: "12px" }}
                 >
@@ -171,14 +172,24 @@ function Navbar() {
                   gap: 0.5,
                   alignItems: "center",
                 }}
-              > <Button
-              sx={{ color: "#4A249D" }}
-              variant="text"
-              size="small"
-              onClick={() => navigate("/add-post")}
-            >
-              Add Post
-            </Button>
+              >
+                {" "}
+                <Button
+                  sx={{ color: "#4A249D" }}
+                  variant="text"
+                  size="small"
+                  onClick={() => navigate(`/userposts/${userID}`)}
+                >
+                 All Post
+                </Button>
+                <Button
+                  sx={{ color: "#4A249D" }}
+                  variant="text"
+                  size="small"
+                  onClick={() => navigate("/add-post")}
+                >
+                  Add Post
+                </Button>
                 <Button
                   sx={{ backgroundColor: "#4A249D" }}
                   variant="contained"
@@ -187,7 +198,6 @@ function Navbar() {
                 >
                   Log out
                 </Button>
-               
               </Box>
             ) : (
               <Box
@@ -243,19 +253,17 @@ function Navbar() {
                       flexGrow: 1,
                     }}
                   ></Box>
-                      <MenuItem   onClick={() => navigate("/")}>
-                    Home
-                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/")}>Home</MenuItem>
                   <MenuItem onClick={() => scrollToSection("notes")}>
                     Notes
                   </MenuItem>
-                 <MenuItem onClick={() => scrollToSection("qpaper")}>
+                  <MenuItem onClick={() => scrollToSection("qpaper")}>
                     Q-Paper
                   </MenuItem>
-                   <MenuItem onClick={() => scrollToSection("qbank")}>
-                   Q-Bank
+                  <MenuItem onClick={() => scrollToSection("qbank")}>
+                    Q-Bank
                   </MenuItem>
-                 {/*  <MenuItem onClick={() => scrollToSection("pricing")}>
+                  {/*  <MenuItem onClick={() => scrollToSection("pricing")}>
                     Pricing
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection("faq")}>
@@ -265,7 +273,17 @@ function Navbar() {
 
                   {authStatus ? (
                     <>
-                         <MenuItem>
+                     <MenuItem>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          onClick={() => navigate(`/userposts/${userID}`)}
+                          sx={{ width: "100%" }}
+                        >
+                          All Post
+                        </Button>
+                      </MenuItem>
+                      <MenuItem>
                         <Button
                           color="primary"
                           variant="contained"

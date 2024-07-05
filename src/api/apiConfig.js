@@ -111,6 +111,19 @@ export class Service {
             return false;
         }
     }
+    async getUserPosts( user, queries = [Query.equal("UserId", user)]) {
+        try {           
+            
+            return await this.databases.listDocuments(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                queries,
+            );
+        } catch (error) {
+            console.log("Appwrite service :: getPosts :: error", error);
+            return false;
+        }
+    }
     
 
     // file upload service

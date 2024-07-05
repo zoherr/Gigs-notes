@@ -21,6 +21,7 @@ import SemesterQPaper from './components/SemesterQPaper.jsx'
 import SubjectQPaper from './components/SubQPaper.jsx'
 import SubjectQBank from './components/SubQBank.jsx'
 import EditPost from './components/EditPost.jsx'
+import  PostList  from './components/PostList.jsx'
 
 const router = createBrowserRouter([
     {
@@ -101,6 +102,15 @@ const router = createBrowserRouter([
                   </AuthLayout>
               ),
           },
+          {
+            path: "/userposts/:user",
+            element: (
+                <AuthLayout authentication>
+                    {" "}
+                    <PostList />
+                </AuthLayout>
+            ),
+        },
           {
               path: "/edit-post/:slug",
               element: (
