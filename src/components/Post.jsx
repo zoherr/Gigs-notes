@@ -8,17 +8,31 @@ import toast from "react-hot-toast";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Button, Input, Select } from "./index";
+import { Document, Page, pdfjs } from "react-pdf";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 export default function Post() {
   const [post, setPost] = useState(null);
+  const [pdfUrl, setPdfUrl] = useState(null); // State to hold PDF URL
   const { slug } = useParams();
   const navigate = useNavigate();
+  const userData = useSelector((state) => state.auth.userData);
+  let isAuthor = false;
+  let isAdmin = false;
+  let userName = "";
+
+  if (userData && post) {
+    isAuthor = post.UserId === userData.$id;
+    isAdmin = userData.labels.includes("admin");
+    userName = userData.name;
+  }
+
   const downloadFile = async () => {
     try {
       const result = await service.getFileDownload(post.PDF);
       const url = result.href;
 
-      // Create a temporary anchor element to trigger the download
       const anchor = document.createElement("a");
       anchor.href = url;
       anchor.download = ""; // Add filename if you want to specify it
@@ -27,38 +41,46 @@ export default function Post() {
       document.body.removeChild(anchor);
     } catch (error) {
       console.error("File download failed", error);
+      toast.error("Failed to download the file");
     }
   };
-  const userData = useSelector((state) => state.auth.userData);
-  let isAuthor = false
-  let isAdmin = false
-  let userName = ""
-  if(userData){
-     isAuthor = post && userData ? post.UserId === userData.$id : false;
-      userName = useSelector((state) => state.auth.userData.name);
-
-     isAdmin = post && userData ? userData.labels[0] === "admin" : false;
-  }
-  
-
-  useEffect(() => {
-    if (slug) {
-      service.getPost(slug).then((post) => {
-        if (post) setPost(post);
-        else navigate("/");
-      });
-    } else navigate("/");
-  }, [slug, navigate]);
 
   const deletePost = () => {
     service.deletePost(post.$id).then((status) => {
       if (status) {
         service.deleteFile(post.PDF);
         navigate("/");
+      } else {
+        toast.error("Failed to delete the post");
       }
     });
   };
 
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const fetchedPost = await service.getPost(slug);
+        if (fetchedPost) {
+          setPost(fetchedPost);
+          // Once post is fetched, fetch the PDF URL
+          const pdffUrl = await service.getPDFUrl(fetchedPost.PDF);
+    
+          setPdfUrl(pdffUrl.href);
+        } else {
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Failed to fetch post:", error);
+        navigate("/");
+      }
+    };
+
+    if (slug) {
+      fetchPost();
+    } else {
+      navigate("/");
+    }
+  }, [slug, navigate]);
   return post ? (
     <>
       <div
@@ -109,6 +131,13 @@ export default function Post() {
           >
             Downlaod File
           </Button>
+          {/* {pdfUrl && (
+            <div className="w-full mt-8">
+              <Document file={pdfUrl}>
+                <Page pageNumber={1} />
+              </Document>
+            </div>
+          )} */}
         </div>
       </div>
       <Footer />

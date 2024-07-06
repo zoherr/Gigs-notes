@@ -161,7 +161,7 @@ export class Service {
         )
     }
     getPDFUrl (fileId) {
-        return this.bucket.getFilePreview(
+        return this.bucket.getFileView(
             config.appwriteBucketPdfId,
             fileId
         )
