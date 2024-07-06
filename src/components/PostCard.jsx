@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const PostCard = ({ $id, title }) => {
   return (
     <Link to={`/post/${$id}`}>
-      <div className="w-full flex bg-gray-100 rounded-xl p-4 hover:shadow-lg transition-shadow duration-200">
+      <div className="w-full flex shadow-lg bg-white/20 backdrop-blur-xml  rounded-xl p-4 hover:shadow-lg transition-shadow duration-200">
         <div className="flex-shrink-0 mr-4">
           <img
             src="https://i.ibb.co/RcRPvGc/Untitled-design.jpg"
