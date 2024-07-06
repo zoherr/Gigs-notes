@@ -33,7 +33,7 @@ function Footer(props) {
           color="text.secondary"
           component="p"
         >
-          Design By Alex
+          Design By Supreme God
         </Typography>
         <Copyright />
       </Container>
