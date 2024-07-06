@@ -147,7 +147,6 @@ export default function NewUser() {
                   </div>
                                 </Grid>
                             </Grid>
-                            <Copyright sx={{ mt: 5 }} />
                         </Box>
                     </Box>
                 </Grid>

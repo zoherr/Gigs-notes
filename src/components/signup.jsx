@@ -145,7 +145,6 @@ export default function SignInSide() {
                   </div>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </form>
           </Box>
         </Grid>

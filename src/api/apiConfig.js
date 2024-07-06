@@ -160,6 +160,12 @@ export class Service {
             fileId
         )
     }
+    getPDFUrl (fileId) {
+        return this.bucket.getFilePreview(
+            config.appwriteBucketPdfId,
+            fileId
+        )
+    }
 
     // Admin Features
    
