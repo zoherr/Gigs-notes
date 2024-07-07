@@ -48,7 +48,7 @@ function Subject() {
       </div>
       <Navbar />
       <div className="w-full sm:my-[6%] my-[40%] py-8">
-      <h1 className="flex justify-center text-5xl mb-8">{name}</h1>
+      <h1 className="flex justify-center text-center text-5xl mb-8">{name}</h1>
 
         <Container>
           {loading ? (
