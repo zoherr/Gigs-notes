@@ -7,10 +7,12 @@ import {login, logout} from "./redux/features/authSlice"
 import { Outlet } from "react-router-dom"
 import Footer from "./components/Footer"
 import Loading from "./components/Loading"
+import GoogleAnalytics from "./components/googleAnalytics"
 
 function App() {
   // 
- 
+  const nonce = 'your-nonce-string'; // This should be generated and passed securely from the server
+
   // 
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
@@ -28,7 +30,8 @@ function App() {
 
   return !loading ? (
     <>
- 
+ <GoogleAnalytics />
+
      <Outlet />
     </>
   ) : (
