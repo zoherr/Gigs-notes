@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import Loading from "./Loading";
 
 const subjectsBySemester = {
+     "Personal":["Personal"],
   1: [
     "basic-mathematics",
     "principles-of-programming-language-c",
@@ -37,6 +38,7 @@ const subjectsBySemester = {
   4: ["operating-system", "basic-of-computer-networks", "software-engineering"],
   5: ["mobile-application-development", "principles-of-ai"],
   6: ["project-ideas"],
+
 };
 
 export default function PostForm({ post }) {
@@ -193,7 +195,7 @@ export default function PostForm({ post }) {
               error={errors.status}
             />
             <Select
-              options={[1, 2, 3, 4, 5, 6]}
+              options={["Personal",1, 2, 3, 4, 5, 6]}
               label="Semester"
               className="mb-4"
               {...register("semester", { required: true })}

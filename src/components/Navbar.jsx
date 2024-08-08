@@ -24,7 +24,7 @@ const logoStyle = {
   height: "auto",
   cursor: "pointer",
   margin: "10px"
-  
+
 };
 
 function Navbar() {
@@ -107,7 +107,7 @@ function Navbar() {
             >
               <img
                 src={"https://i.ibb.co/ph3JYkj/logoipsum-293-1.png"}
-          
+
                 style={logoStyle}
                 height="5"
                 alt="logo of sitemark"
@@ -174,7 +174,14 @@ function Navbar() {
                   gap: 0.5,
                   alignItems: "center",
                 }}
-              >
+              >   <Button
+              sx={{ color: "#4A249D" }}
+              variant="text"
+              size="small"
+              onClick={() => navigate(`/userpersonalposts/${userID}`)}
+            >
+             Personal
+            </Button>
                 {" "}
                 <Button
                   sx={{ color: "#4A249D" }}
@@ -275,6 +282,16 @@ function Navbar() {
 
                   {authStatus ? (
                     <>
+                       <MenuItem>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          onClick={() => navigate(`/userpersonalposts/${userID}`)}
+                          sx={{ width: "100%" }}
+                        >
+                        Personal
+                        </Button>
+                      </MenuItem>
                      <MenuItem>
                         <Button
                           color="primary"

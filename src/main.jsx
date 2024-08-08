@@ -23,6 +23,7 @@ import SubjectQBank from './components/SubQBank.jsx'
 import EditPost from './components/EditPost.jsx'
 import  PostList  from './components/PostList.jsx'
 import GoogleAnalytics from './components/googleAnalytics.jsx'
+import UserPersonalPost from './components/UserPosts.jsx'
 
 const router = createBrowserRouter([
     {
@@ -109,6 +110,15 @@ const router = createBrowserRouter([
                 <AuthLayout authentication>
                     {" "}
                     <PostList />
+                </AuthLayout>
+            ),
+        },
+        {
+            path: "/userpersonalposts/:user",
+            element: (
+                <AuthLayout authentication>
+                    {" "}
+                    <UserPersonalPost />
                 </AuthLayout>
             ),
         },

@@ -100,7 +100,7 @@ export class Service {
             if (type) {
                 queries.push(Query.equal("type", type));
             }
-            
+
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
@@ -112,8 +112,8 @@ export class Service {
         }
     }
     async getUserPosts( user, queries = [Query.equal("UserId", user)]) {
-        try {           
-            
+        try {
+
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
@@ -124,7 +124,22 @@ export class Service {
             return false;
         }
     }
-    
+    async getUserPersonalPosts(user, queries = [Query.equal("UserId", user)]) {
+        try {
+            // Adding a condition to check if semester equals "Personal"
+            queries.push(Query.equal("semester", "Personal"));
+
+            return await this.databases.listDocuments(
+                config.appwriteDatabaseId,
+                config.appwriteCollectionId,
+                queries,
+            );
+        } catch (error) {
+            console.log("Appwrite service :: getPosts :: error", error);
+            return false;
+        }
+    }
+
 
     // file upload service
 
@@ -168,7 +183,7 @@ export class Service {
     }
 
     // Admin Features
-   
+
 }
 
 

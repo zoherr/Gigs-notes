@@ -8,7 +8,7 @@ import { Container } from "../components";
 import { Card, Grid, Stack } from "@mui/material";
 import Loading from "./Loading";
 
-function PostList() {
+function UserPersonalPost() {
   const { user } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true); // Added loading state
@@ -17,7 +17,7 @@ function PostList() {
 
   useEffect(() => {
     setLoading(true);
-    service.getUserPosts(user) // Pass subject (name) and type ("notes")
+    service.getUserPersonalPosts(user) // Pass subject (name) and type ("notes")
       .then((posts) => {
         if (posts) {
           setPosts(posts.documents);
@@ -48,7 +48,7 @@ function PostList() {
       </div>
       <Navbar />
       <div className="w-full sm:my-[6%] my-[40%] py-8">
-      <h1 className="flex justify-center text-5xl mb-8">My Contribution</h1>
+      <h1 className="flex justify-center text-5xl mb-8">My Personal Files</h1>
         <Container>
           {loading ? (
             <div className="flex justify-center items-center">
@@ -87,4 +87,4 @@ function PostList() {
   );
 }
 
-export default PostList;
+export default UserPersonalPost;
