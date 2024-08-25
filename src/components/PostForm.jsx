@@ -213,7 +213,7 @@ export default function PostForm({ post }) {
                         {selection === "semester" && (
                         <>
                         <Select
-                            options={["Personal", 1, 2, 3, 4, 5, 6]}
+                            options={[1, 2, 3, 4, 5, 6]}
                             label="Semester"
                             className="mb-4"
                             {...register("semester", { required: true })}
