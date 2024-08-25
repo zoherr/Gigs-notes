@@ -194,7 +194,7 @@ export default function PostForm({ post }) {
                             {...register("status", { required: true })}
                             error={errors.status}
                         />
-                        <div className="mb-4">
+                        <div className="mb-4 text-xl">
                             <label className="mr-2">Personal</label>
                             <input
                                 type="radio"
@@ -202,7 +202,7 @@ export default function PostForm({ post }) {
                                 checked={selection === "personal"}
                                 onChange={() => setSelection("personal")}
                             />
-                            <label className="ml-4 mr-2">Semester</label>
+                            <label className="ml-7 mr-2">Semester</label>
                             <input
                                 type="radio"
                                 value="semester"
